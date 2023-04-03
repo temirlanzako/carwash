@@ -15,7 +15,12 @@ repositories {
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation "mysql:mysql-connector-java:8.0.15"
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+	runtimeClasspath "org.springframework.boot:spring-boot-devtools"
+
+	compileOnly("org.projectlombok:lombok:1.16.10")
 }
 
 tasks.named('test') {
