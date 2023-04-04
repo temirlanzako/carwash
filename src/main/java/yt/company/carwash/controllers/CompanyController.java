@@ -34,13 +34,18 @@ public class CompanyController {
         }
     }
 
-    @PostMapping("/create")
-    public ResponseEntity<Object> createCompany(@RequestBody Company companies) {
-        Company companiesFromDb = companyService.createCompany(companies);
-        return ResponseEntity.ok(companiesFromDb);
-    }
+    @PostMapping("/create/{id}")
+    public ResponseEntity<Object> createCompany(@RequestBody Company company,
+                                                @PathVariable(name="id") Long userId) {
 
-    @PutMapping("/update/{id}")
+        return ResponseEntity.ok(companyService.createCompany(company, userId));
+    }
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<Object> deleteCompany(@PathVariable Long id) {
+        companyService.deleteCompany(id);
+        return ResponseEntity.noContent().build();
+    }
+    /*@PutMapping("/update/{id}")
     public ResponseEntity<?> updateCompany(@RequestBody Company company,
                                            @PathVariable(name="id") Long id) {
         try {
@@ -51,11 +56,5 @@ public class CompanyController {
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-    }
-
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Object> deleteCompany(@PathVariable Long id) {
-        companyService.deleteCompany(id);
-        return ResponseEntity.noContent().build();
-    }
+    }*/
 }

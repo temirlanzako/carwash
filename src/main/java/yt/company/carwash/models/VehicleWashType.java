@@ -7,7 +7,7 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-public class ServiceType extends BaseModel{
+public class VehicleWashType extends BaseModel{
 
     private String name;
 }

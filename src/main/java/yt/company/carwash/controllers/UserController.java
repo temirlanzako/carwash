@@ -1,10 +1,13 @@
 package yt.company.carwash.controllers;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import yt.company.carwash.models.User;
 import yt.company.carwash.services.UserService;
+
+import java.util.List;
 
 @RestController
 @RequestMapping(value = "/user")
@@ -12,12 +15,19 @@ import yt.company.carwash.services.UserService;
 public class UserController {
 
     private final UserService userService;
-    @PostMapping(value = "/create")
-    public ResponseEntity<?> createUser(@RequestBody User user) {
-        return ResponseEntity.ok(userService.createUser(user));
+
+    @GetMapping
+    public List<User> getUsers() {
+        return userService.getAllUsers();
     }
     @GetMapping(value ="/{id}")
     public User getUser(@PathVariable Long id) {
         return userService.getUser(id);
+    }
+    @PostMapping(value = "/create")
+    public ResponseEntity<?> createUser(@RequestParam String email,
+                                        @RequestParam String password,
+                                        @RequestParam String rePassword) {
+        return ResponseEntity.ok(userService.createUser(email, password, rePassword));
     }
 }

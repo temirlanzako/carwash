@@ -8,4 +8,7 @@ import yt.company.carwash.models.Company;
 @Repository
 @Transactional
 public interface CompanyRepository extends JpaRepository<Company, Long> {
+
+    Company findByAddress(String address);
+    Company findByPhone(String phone);
 }

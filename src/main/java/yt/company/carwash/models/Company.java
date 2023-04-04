@@ -3,12 +3,7 @@ package yt.company.carwash.models;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
 
-import java.lang.reflect.Type;
 import java.util.List;
 
 @Entity
@@ -19,14 +14,15 @@ public class Company extends BaseModel {
     private String name;
     private String address;
     private String phone;
-    private int totalNumberOfBoxes;
-    private int boxesAvailable;
+    private short capacity;
+
     @OneToMany
-    private List<ServiceType> typesOfService;
+    private List<VehicleType> vehicleTypes;
+    @OneToMany
+    //@JoinColumn(name = "company_id")
+    private List<VehicleWashType> serviceTypes;
     @OneToMany
     private List<City> cities;
-    @OneToMany
-    private List<CarType> carTypes;
     @OneToOne
     private User user;
 }
