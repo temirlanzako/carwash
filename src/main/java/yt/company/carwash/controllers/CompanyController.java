@@ -1,6 +1,6 @@
 package yt.company.carwash.controllers;
 
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,14 +11,27 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/company")
-@AllArgsConstructor
-public class CompaniesController {
+@RequiredArgsConstructor
+public class CompanyController {
 
     private final CompanyService companyService;
+
     @GetMapping
     public ResponseEntity<Object> getAllCompanies() {
         List<Company> companiesList = companyService.getAllCompanies();
         return ResponseEntity.ok(companiesList);
+    }
+
+
+    @GetMapping(value="{id}")
+    public ResponseEntity<Object> getCompany(@PathVariable(name="id") Long id) {
+        try {
+            Company company = companyService.getCompany(id);
+            return ResponseEntity.ok(company);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
     @PostMapping("/create")
@@ -27,11 +40,12 @@ public class CompaniesController {
         return ResponseEntity.ok(companiesFromDb);
     }
 
-    @PutMapping("/update")
-    public ResponseEntity<?> updateCompany(@RequestBody Company company) {
+    @PutMapping("/update/{id}")
+    public ResponseEntity<?> updateCompany(@RequestBody Company company,
+                                           @PathVariable(name="id") Long id) {
         try {
-            Company companiesFromDb = companyService.get(company.getId());
-            companyService.createCompany(company);
+            Company companiesFromDb = companyService.getCompany(id);
+            companyService.updateCompany(company);
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (Exception e) {
             e.printStackTrace();
@@ -40,7 +54,7 @@ public class CompaniesController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Object> deleteCompany(@PathVariable int id) {
+    public ResponseEntity<Object> deleteCompany(@PathVariable Long id) {
         companyService.deleteCompany(id);
         return ResponseEntity.noContent().build();
     }

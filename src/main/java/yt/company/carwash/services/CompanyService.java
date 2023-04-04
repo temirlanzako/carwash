@@ -1,6 +1,6 @@
 package yt.company.carwash.services;
 
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import yt.company.carwash.models.Company;
 import yt.company.carwash.repository.CompanyRepository;
@@ -8,29 +8,32 @@ import yt.company.carwash.repository.CompanyRepository;
 import java.util.List;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class CompanyService {
 
-    private CompanyRepository companyRepository;
-
+    private final CompanyRepository companyRepository;
 
     public List<Company> getAllCompanies() {
         return companyRepository.findAll();
     }
 
-    public Company get(int id) {
-        return companyRepository.getReferenceById(id);
+    public Company getCompany(Long id) {
+
+        return this.companyRepository.findById(id).orElseThrow();
     }
 
     public Company createCompany(Company companies) {
+
         return companyRepository.save(companies);
     }
 
     public Company updateCompany(Company companies) {
+
         return companyRepository.save(companies);
     }
 
-    public void deleteCompany(int companyId) {
-        companyRepository.deleteById(companyId);
+    public void deleteCompany(Long id) {
+
+        companyRepository.deleteById(id);
     }
 }
