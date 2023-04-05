@@ -46,7 +46,6 @@ public class CompanyService {
         } else {
             throw new IllegalArgumentException("Company with such PHONE NUMBER is already exists" + checkPhone.getPhone());
         }
-
     }
     public void deleteCompany(Long id) {
         companyRepository.deleteById(id);

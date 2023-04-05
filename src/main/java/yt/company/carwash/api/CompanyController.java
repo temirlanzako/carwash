@@ -1,4 +1,4 @@
-package yt.company.carwash.controllers;
+package yt.company.carwash.api;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

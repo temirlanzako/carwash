@@ -1,9 +1,8 @@
-package yt.company.carwash.controllers;
+package yt.company.carwash.api;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import yt.company.carwash.models.City;
 import yt.company.carwash.models.Client;
 import yt.company.carwash.services.ClientService;
 
