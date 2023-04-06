@@ -1,5 +1,6 @@
 package yt.company.carwash.services;
 
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import lombok.RequiredArgsConstructor;
@@ -21,7 +22,7 @@ public class CompanyService {
     }
 
     public Company getCompany(Long id) {
-        return this.companyRepository.findById(id).orElseThrow();
+        return this.companyRepository.findById(id).orElseThrow(()->new EntityNotFoundException("Company not found"));
     }
 
     public Company createCompany(Company company, Long userId) {
@@ -46,7 +47,6 @@ public class CompanyService {
         } else {
             throw new IllegalArgumentException("Company with such PHONE NUMBER is already exists" + checkPhone.getPhone());
         }
-
     }
     public void deleteCompany(Long id) {
         companyRepository.deleteById(id);

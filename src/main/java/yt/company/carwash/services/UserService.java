@@ -1,5 +1,6 @@
 package yt.company.carwash.services;
 
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.support.StandardMultipartHttpServletRequest;
@@ -21,7 +22,7 @@ public class UserService {
 
 
     public User getUser(Long id) {
-        return userRepository.findById(id).orElseThrow();
+        return userRepository.findById(id).orElseThrow(()->new EntityNotFoundException("User not found"));
     }
     public List<User> getAllUsers() {
         return userRepository.findAll();

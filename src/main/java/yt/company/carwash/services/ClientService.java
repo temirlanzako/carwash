@@ -1,5 +1,6 @@
 package yt.company.carwash.services;
 
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import yt.company.carwash.models.City;
@@ -32,7 +33,7 @@ public class ClientService {
         if(client == null) {
             Client account = new Client();
             account.setUser(userService.getUser(userId));
-            account.setCity(cityRepository.findById(cityId).orElseThrow());
+            account.setCity(cityRepository.findById(cityId).orElseThrow(()->new EntityNotFoundException("City not found")));
             account.setPhone(phone);
             account.setName(name);
             account.setSurname(surname);
