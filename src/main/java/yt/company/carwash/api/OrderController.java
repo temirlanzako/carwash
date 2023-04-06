@@ -36,8 +36,13 @@ public class OrderController {
                                          @RequestParam(name="service_type_id") Long serviceId,
                                          @RequestParam(name="vehicle_type_id") Long vehicleId,
                                          @RequestParam(name="time") Date date) {
-        orderService.createOrder(clientId,companyId,cityId,serviceId,vehicleId,date);
-        return new ResponseEntity<>(HttpStatus.CREATED);
+        try {
+            orderService.createOrder(clientId, companyId, cityId, serviceId, vehicleId, date);
+            return new ResponseEntity<>(HttpStatus.CREATED);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
     }
     @DeleteMapping (value = "/delete")
     public ResponseEntity<?> deleteOrder(@RequestParam Long id){

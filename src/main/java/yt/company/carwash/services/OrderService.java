@@ -1,5 +1,6 @@
 package yt.company.carwash.services;
 
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.persistence.OneToOne;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -49,9 +50,9 @@ public class OrderService {
         Order order = new Order();
         order.setClient(clientService.getClient(clientId));
         order.setCompany(companyService.getCompany(companyId));
-        order.setCity(cityRepository.findById(cityId).orElseThrow());
-        order.setServiceType(vehicleWashTypeRepository.findById(serviceId).orElseThrow());
-        order.setVehicleType(vehicleTypeRepository.findById(vehicleId).orElseThrow());
+        order.setCity(cityRepository.findById(cityId).orElseThrow(() -> new EntityNotFoundException("City not found")));
+        order.setServiceType(vehicleWashTypeRepository.findById(serviceId).orElseThrow(()-> new EntityNotFoundException("ServiceType not found")));
+        order.setVehicleType(vehicleTypeRepository.findById(vehicleId).orElseThrow(()->new EntityNotFoundException("VehicleType not found")));
         order.setDate(date);
         order.setIsCompleted(Boolean.FALSE);
         orderRepository.save(order);
