@@ -23,8 +23,8 @@ public class CompanyController {
     }
 
 
-    @GetMapping(value="{id}")
-    public ResponseEntity<Object> getCompany(@PathVariable(name="id") Long id) {
+    @GetMapping(value = "{id}")
+    public ResponseEntity<Object> getCompany(@PathVariable(name = "id") Long id) {
         try {
             Company company = companyService.getCompany(id);
             return ResponseEntity.ok(company);
@@ -36,10 +36,11 @@ public class CompanyController {
 
     @PostMapping("/create/{id}")
     public ResponseEntity<Object> createCompany(@RequestBody Company company,
-                                                @PathVariable(name="id") Long userId) {
+                                                @PathVariable(name = "id") Long userId) {
 
         return ResponseEntity.ok(companyService.createCompany(company, userId));
     }
+
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Object> deleteCompany(@PathVariable Long id) {
         companyService.deleteCompany(id);
