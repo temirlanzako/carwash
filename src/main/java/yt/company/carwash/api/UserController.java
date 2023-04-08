@@ -19,10 +19,12 @@ public class UserController {
     public List<User> getUsers() {
         return userService.getAllUsers();
     }
-    @GetMapping(value ="/{id}")
+
+    @GetMapping(value = "/{id}")
     public User getUser(@PathVariable Long id) {
         return userService.getUser(id);
     }
+
     @PostMapping(value = "/create")
     public ResponseEntity<?> createUser(@RequestParam String email,
                                         @RequestParam String password,

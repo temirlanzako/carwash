@@ -9,7 +9,7 @@ import yt.company.carwash.services.OrderService;
 import java.util.Date;
 
 @RestController
-@RequestMapping(value="/order")
+@RequestMapping(value = "/order")
 @RequiredArgsConstructor
 public class OrderController {
 
@@ -17,7 +17,7 @@ public class OrderController {
 
     @GetMapping(value = "/{id}")
     public ResponseEntity<Object> getOrder(@PathVariable Long id) {
-        try{
+        try {
             return ResponseEntity.ok(orderService.getOrder(id));
         } catch (Exception e) {
             e.printStackTrace();
@@ -25,17 +25,19 @@ public class OrderController {
         }
 
     }
+
     @GetMapping
-    public ResponseEntity<?> getAllOrders(){
+    public ResponseEntity<?> getAllOrders() {
         return ResponseEntity.ok(orderService.getAllOrders());
     }
+
     @PostMapping(value = "/create")
-    public ResponseEntity<?> createOrder(@RequestParam(name="client_id") Long clientId,
-                                         @RequestParam(name="company_id") Long companyId,
-                                         @RequestParam(name="city_id") Long cityId,
-                                         @RequestParam(name="service_type_id") Long serviceId,
-                                         @RequestParam(name="vehicle_type_id") Long vehicleId,
-                                         @RequestParam(name="time") Date date) {
+    public ResponseEntity<?> createOrder(@RequestParam(name = "client_id") Long clientId,
+                                         @RequestParam(name = "company_id") Long companyId,
+                                         @RequestParam(name = "city_id") Long cityId,
+                                         @RequestParam(name = "service_type_id") Long serviceId,
+                                         @RequestParam(name = "vehicle_type_id") Long vehicleId,
+                                         @RequestParam(name = "time") Date date) {
         try {
             orderService.createOrder(clientId, companyId, cityId, serviceId, vehicleId, date);
             return new ResponseEntity<>(HttpStatus.CREATED);
@@ -44,11 +46,13 @@ public class OrderController {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
-    @DeleteMapping (value = "/delete")
-    public ResponseEntity<?> deleteOrder(@RequestParam Long id){
+
+    @DeleteMapping(value = "/delete")
+    public ResponseEntity<?> deleteOrder(@RequestParam Long id) {
         orderService.deleteOrder(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
     @PutMapping(value = "/update")
     public ResponseEntity<?> updateOrder(@RequestParam Long id) {
         try {
