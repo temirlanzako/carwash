@@ -3,9 +3,7 @@ package yt.company.carwash.services;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import yt.company.carwash.models.City;
-import yt.company.carwash.models.Client;
-import yt.company.carwash.models.User;
+import yt.company.carwash.models.WebClient;
 import yt.company.carwash.repository.CityRepository;
 import yt.company.carwash.repository.ClientRepository;
 
@@ -20,18 +18,18 @@ public class ClientService {
 
     private final CityRepository cityRepository;
 
-    public Client getClient(Long id) {
+    public WebClient getClient(Long id) {
         return clientRepository.findById(id).orElseThrow();
     }
 
-    public List<Client> getAllClients() {
+    public List<WebClient> getAllClients() {
         return clientRepository.findAll();
     }
 
-    public Client createClient(String name, String surname, String phone, Long cityId, Long userId) {
-        Client client = clientRepository.findByPhone(phone);
+    public WebClient createClient(String name, String surname, String phone, Long cityId, Long userId) {
+        WebClient client = clientRepository.findByPhone(phone);
         if(client == null) {
-            Client account = new Client();
+            WebClient account = new WebClient();
             account.setUser(userService.getUser(userId));
             account.setCity(cityRepository.findById(cityId).orElseThrow(()->new EntityNotFoundException("City not found")));
             account.setPhone(phone);

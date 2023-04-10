@@ -19,4 +19,8 @@ public class WebClient extends BaseModel{
     @OneToOne
     @Cascade(CascadeType.ALL)
     private User user;
+<<<<<<< HEAD
+=======
+
+>>>>>>> review
 }

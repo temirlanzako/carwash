@@ -13,7 +13,7 @@ import java.util.Date;
 @Setter
 public class Order extends BaseModel {
     @OneToOne
-    private Client client;
+    private WebClient client;
     @OneToOne
     private Company company;
     @OneToOne

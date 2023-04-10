@@ -5,10 +5,9 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 import org.springframework.stereotype.Service;
-import yt.company.carwash.json.Main;
-import yt.company.carwash.json.WeatherData;
+import yt.company.carwash.weatherApi.Temperature;
+import yt.company.carwash.weatherApi.WeatherData;
 
-import java.io.IOException;
 import java.util.Objects;
 
 @Service
@@ -28,10 +27,10 @@ public class WeatherService {
 
             ObjectMapper objectMapper = new ObjectMapper();
             WeatherData weatherData = objectMapper.readValue(responseBody, WeatherData.class);
-            double toCelsius = weatherData.getMain().getTemp() - 273.15;
-            Main main = new Main();
-            main.setTemp(Math.round(toCelsius*100.0)/100.0);
-            weatherData.setMain(main);
+            double toCelsius = weatherData.getTemperature().getTemp() - 273.15;
+            Temperature temperature = new Temperature();
+            temperature.setTemp(Math.round(toCelsius*100.0)/100.0);
+            weatherData.setTemperature(temperature);
 
             return weatherData;
         } catch (Exception e) {
