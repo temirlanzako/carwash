@@ -5,7 +5,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.OneToOne;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.Value;
 
 import java.util.Date;
 
@@ -16,7 +15,7 @@ import java.util.Date;
 public class Review extends BaseModel {
 
     @OneToOne
-    private Client client;
+    private WebClient client;
     @OneToOne
     private Company company;
     @Column(columnDefinition="TEXT")

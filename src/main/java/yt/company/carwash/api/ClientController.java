@@ -3,7 +3,7 @@ package yt.company.carwash.api;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import yt.company.carwash.models.Client;
+import yt.company.carwash.models.WebClient;
 import yt.company.carwash.services.ClientService;
 import yt.company.carwash.services.WeatherService;
 
@@ -19,12 +19,12 @@ public class ClientController {
     private final WeatherService weatherService;
 
     @GetMapping(value = "{id}")
-    public Client getClient(@PathVariable Long id) {
+    public WebClient getClient(@PathVariable Long id) {
         return clientService.getClient(id);
     }
 
     @GetMapping
-    public List<Client> getAllClients() {
+    public List<WebClient> getAllClients() {
         return clientService.getAllClients();
     }
 
