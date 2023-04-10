@@ -13,25 +13,35 @@ import java.util.Date;
 
 @RestController
 @RequestMapping(value = "/order")
+
 public class OrderController {
     @Autowired
     private  OrderBaseService orderBaseService;
 
 
+    @GetMapping
+    public ResponseEntity<?> getAllOrders() {
+        return ResponseEntity.ok(orderService.getAllOrders());
+    }
+
     @GetMapping(value = "/{id}")
     public ResponseEntity<Object> getOrder(@PathVariable Long id) {
         try {
+
             return ResponseEntity.ok(orderBaseService.getOrder(id));
+
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
+
 
     }
 
     @GetMapping
     public ResponseEntity<?> getAllOrders() {
         return ResponseEntity.ok(orderBaseService.getAllOrders());
+
     }
 
     @PostMapping(value = "/create")
@@ -41,6 +51,7 @@ public class OrderController {
                                          @RequestParam(name = "service_type_id") Long serviceId,
                                          @RequestParam(name = "vehicle_type_id") Long vehicleId,
                                          @RequestParam(name = "time") Timestamp timestamp) {
+
         try {
             orderBaseService.createOrder(clientId, companyId, cityId, serviceId, vehicleId, timestamp);
             return new ResponseEntity<>(HttpStatus.CREATED);
@@ -53,6 +64,7 @@ public class OrderController {
     @DeleteMapping(value = "/delete")
     public ResponseEntity<?> deleteOrder(@RequestParam Long id) {
         orderBaseService.deleteOrder(id);
+
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

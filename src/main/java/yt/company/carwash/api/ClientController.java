@@ -19,6 +19,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ClientController {
 
+
     private final WebClientService webClientService;
     private final WeatherService weatherService;
 
@@ -29,10 +30,12 @@ public class ClientController {
         return webClientService.getClient(id);
     }
 
+
     @GetMapping
     public List<WebClient> getAllClients() {
         return webClientService.getAllClients();
     }
+
 
     @DeleteMapping(value = "/delete/{id}")
     public ResponseEntity<?> deleteClient(@PathVariable Long id) {
@@ -46,6 +49,7 @@ public class ClientController {
                                                @RequestParam String phone,
                                                @RequestParam Long cityId,
                                                @PathVariable(name = "id") Long userId) {
+
         return ResponseEntity.ok(webClientService.createClient(name, surname, phone, cityId, userId));
     }
     @GetMapping(value = "/weather/{london}")
@@ -72,5 +76,4 @@ public class ClientController {
     public ResponseEntity<?> updateClient(@RequestBody Client client) {
         clientService.updateClient(client);
     }*/
-
 }

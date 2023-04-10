@@ -14,6 +14,12 @@ import yt.company.carwash.services.ReviewService;
 public class ReviewController {
     private final ReviewService reviewService;
 
+
+    @GetMapping
+    public ResponseEntity<Object> getAllReviews() {
+        return ResponseEntity.ok(reviewService.getAllReviews());
+    }
+
     @GetMapping(value = "{id}")
     public ResponseEntity<Object> getReview(@PathVariable Long id) {
         try {
@@ -22,11 +28,6 @@ public class ReviewController {
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-    }
-
-    @GetMapping
-    public ResponseEntity<Object> getAllReviews() {
-        return ResponseEntity.ok(reviewService.getAllReviews());
     }
 
     @GetMapping(value = "/company/{companyId}")
