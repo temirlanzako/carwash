@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import yt.company.carwash.models.*;
 import yt.company.carwash.repository.CompanyRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -16,6 +17,7 @@ public class CompanyService {
 
     private final CompanyRepository companyRepository;
     private final UserService userService;
+
 
     public List<Company> getAllCompanies() {
         return companyRepository.findAll();
@@ -51,8 +53,7 @@ public class CompanyService {
     public void deleteCompany(Long id) {
         companyRepository.deleteById(id);
     }
-    /*public Company updateCompany(Company companies) {
 
-        return companyRepository.save(companies);
-    }*/
+
+
 }

@@ -16,8 +16,7 @@ public class Company extends BaseModel {
     private String name;
     private String address;
     private String phone;
-    private short capacity;
-
+    private int capacity;
     @ManyToMany
     private List<VehicleType> vehicleTypes;
     @OneToMany

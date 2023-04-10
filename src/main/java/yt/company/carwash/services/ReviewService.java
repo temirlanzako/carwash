@@ -5,10 +5,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import yt.company.carwash.models.Review;
 import yt.company.carwash.repository.ReviewRepository;
-import yt.company.carwash.repository.UserRepository;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -17,7 +15,7 @@ import java.util.List;
 public class ReviewService {
 
     private final ReviewRepository reviewRepository;
-    private final ClientService clientService;
+    private final WebClientService webClientService;
     public Review getReview(Long id) {
         return reviewRepository.findById(id).orElseThrow(()->new EntityNotFoundException("Review not found"));
     }

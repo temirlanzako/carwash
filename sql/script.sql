@@ -53,6 +53,7 @@ CREATE TABLE Company
     address VARCHAR(255) NOT NULL,
     phone VARCHAR(255) NOT NULL UNIQUE,
     capacity SMALLINT NOT NULL CHECK (capacity >= 0),
+    availableBoxes SMALLINT NOT NULL CHECK (availableBoxes <= capacity),
     user_id BIGINT REFERENCES User (id) ON DELETE CASCADE NOT NULL
 );
 
@@ -77,10 +78,14 @@ CREATE TABLE Company_City
     PRIMARY KEY (company_id, city_id)
 );
 
-CREATE TABLE Order
+CREATE TABLE OrderBase
 (
     id BIGINT PRIMARY KEY REFERENCES BaseModel (id),
     client_id BIGINT REFERENCES Client (id) NOT NULL,
     company_id BIGINT REFERENCES Company (id) NOT NULL,
     serviceType_id BIGINT REFERENCES VehicleWashType (id) NOT NULL,
-    vehicleType_id BIGINT REFERENCES VehicleType (id) NOT NULL
+    vehicleType_id BIGINT REFERENCES VehicleType (id) NOT NULL,
+    city_id        BIGINT REFERENCES City (id),
+    date           DATE,
+    isCompleted    BOOLEAN
+);

@@ -1,17 +1,21 @@
 package yt.company.carwash.models;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToOne;
 
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 @Entity
 @Getter
 @Setter
-public class Order extends BaseModel {
+public class OrderBase extends BaseModel {
     @OneToOne
     private WebClient client;
     @OneToOne
@@ -22,6 +26,8 @@ public class Order extends BaseModel {
     private VehicleType vehicleType;
     @OneToOne
     private City city;
-    private Date date;
+    @Temporal(TemporalType.TIMESTAMP)
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSZ") // 2023-04-10 13:19:09.000000
+    private Timestamp timestamp;
     private Boolean isCompleted;
 }

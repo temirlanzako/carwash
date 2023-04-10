@@ -2,8 +2,10 @@ package yt.company.carwash.services;
 
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.support.StandardMultipartHttpServletRequest;
+import yt.company.carwash.models.OrderBase;
 import yt.company.carwash.models.Permission;
 import yt.company.carwash.models.User;
 import yt.company.carwash.repository.PermissionRepository;
@@ -19,6 +21,8 @@ public class UserService {
     private final UserRepository userRepository;
 
     private final PermissionRepository permissionRepository;
+
+
 
 
     public User getUser(Long id) {
