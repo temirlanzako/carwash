@@ -1,6 +1,7 @@
 package yt.company.carwash.api;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,11 +14,10 @@ import yt.company.carwash.services.ReviewService;
 @RequiredArgsConstructor
 public class ReviewController {
     private final ReviewService reviewService;
-
-
     @GetMapping
-    public ResponseEntity<Object> getAllReviews() {
-        return ResponseEntity.ok(reviewService.getAllReviews());
+    public ResponseEntity<Object> getAllReviews(@RequestParam(required = false, defaultValue = "0") int page,
+                                                @RequestParam(required = false, defaultValue = "5") int size) {
+        return ResponseEntity.ok(reviewService.getAllReviews(PageRequest.of(page, size)));
     }
 
     @GetMapping(value = "{id}")
@@ -31,8 +31,10 @@ public class ReviewController {
     }
 
     @GetMapping(value = "/company/{companyId}")
-    public ResponseEntity<Object> getCompanyReviews(@PathVariable(name = "companyId") Long id) {
-        return ResponseEntity.ok(reviewService.getCompanyReviews(id));
+    public ResponseEntity<Object> getCompanyReviews(@PathVariable(name = "companyId") Long id,
+                                                    @RequestParam(required = false, defaultValue = "0") int page,
+                                                    @RequestParam(required = false, defaultValue = "5") int size) {
+        return ResponseEntity.ok(reviewService.getCompanyReviews(id, PageRequest.of(page, size)));
     }
 
     @PostMapping(value = "/create")

@@ -9,7 +9,7 @@ import org.hibernate.annotations.CascadeType;
 @Entity
 @Getter
 @Setter
-public class WebClient extends BaseModel{
+public class Client extends BaseModel{
 
     private String name;
     private String surname;

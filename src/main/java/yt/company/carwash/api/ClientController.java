@@ -4,14 +4,12 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import yt.company.carwash.models.OrderBase;
-import yt.company.carwash.models.WebClient;
+import yt.company.carwash.models.Client;
 import yt.company.carwash.services.OrderBaseService;
 import yt.company.carwash.services.WebClientService;
 import yt.company.carwash.services.WeatherService;
 
 import java.sql.Timestamp;
-import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -26,13 +24,13 @@ public class ClientController {
     private final OrderBaseService orderBaseService;
 
     @GetMapping(value = "{id}")
-    public WebClient getClient(@PathVariable Long id) {
+    public Client getClient(@PathVariable Long id) {
         return webClientService.getClient(id);
     }
 
 
     @GetMapping
-    public List<WebClient> getAllClients() {
+    public List<Client> getAllClients() {
         return webClientService.getAllClients();
     }
 
