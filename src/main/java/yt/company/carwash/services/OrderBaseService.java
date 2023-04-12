@@ -84,8 +84,6 @@ public class OrderBaseService {
             if(count >= capacity ){
                 return Boolean.FALSE;
             }
-            System.out.println(order.getTimestamp());
-            System.out.println(timestamp);
         }
         return Boolean.TRUE;
     }

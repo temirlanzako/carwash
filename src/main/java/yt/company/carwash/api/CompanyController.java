@@ -1,5 +1,6 @@
 package yt.company.carwash.api;
 
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -50,22 +51,25 @@ public class CompanyController {
         companyService.deleteCompany(id);
         return ResponseEntity.noContent().build();
     }
+
     @PutMapping("/changestatus/{orderId}/{companyId}")
-    public ResponseEntity<?> changeStatus(@PathVariable(name="orderId") Long orderId,
-                                          @PathVariable(name="companyId") Long companyId) {
+    public ResponseEntity<?> changeStatus(@PathVariable(name = "orderId") Long orderId,
+                                          @PathVariable(name = "companyId") Long companyId) {
         try {
-            for(OrderBase order : orderBaseService.getCompanyOrders(companyId)) {
-                if(orderId == order.getId()) {
+            for (OrderBase order : orderBaseService.getCompanyOrders(companyId)) {
+                if (orderId == order.getId()) {
                     orderBaseService.changeStatus(orderId);
                     return new ResponseEntity<>(HttpStatus.ACCEPTED);
                 }
             }
             return new ResponseEntity<>(HttpStatus.METHOD_NOT_ALLOWED);
-        } catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
+
+
     /*@PutMapping("/update/{id}")
     public ResponseEntity<?> updateCompany(@RequestBody Company company,
                                            @PathVariable(name="id") Long id) {

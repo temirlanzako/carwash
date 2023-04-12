@@ -10,14 +10,13 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.sql.Timestamp;
-import java.util.Date;
 
 @Entity
 @Getter
 @Setter
 public class OrderBase extends BaseModel {
     @OneToOne
-    private WebClient client;
+    private Client client;
     @OneToOne
     private Company company;
     @OneToOne

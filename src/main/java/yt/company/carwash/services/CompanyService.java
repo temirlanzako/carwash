@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import yt.company.carwash.models.*;
 import yt.company.carwash.repository.CompanyRepository;
+import yt.company.carwash.repository.RatingRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +18,7 @@ public class CompanyService {
 
     private final CompanyRepository companyRepository;
     private final UserService userService;
+
 
 
     public List<Company> getAllCompanies() {
@@ -53,7 +55,6 @@ public class CompanyService {
     public void deleteCompany(Long id) {
         companyRepository.deleteById(id);
     }
-
 
 
 }

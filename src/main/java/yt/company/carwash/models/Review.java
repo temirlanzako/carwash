@@ -15,7 +15,7 @@ import java.util.Date;
 public class Review extends BaseModel {
 
     @OneToOne
-    private WebClient client;
+    private Client client;
     @OneToOne
     private Company company;
     @Column(columnDefinition="TEXT")
