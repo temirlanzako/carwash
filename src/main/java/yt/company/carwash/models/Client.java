@@ -9,6 +9,7 @@ import org.hibernate.annotations.CascadeType;
 @Entity
 @Getter
 @Setter
+@Table(name="client")
 public class Client extends BaseModel{
 
     private String name;

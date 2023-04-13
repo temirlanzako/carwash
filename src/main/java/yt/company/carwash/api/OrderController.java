@@ -8,20 +8,20 @@ import org.springframework.web.bind.annotation.*;
 import yt.company.carwash.models.OrderBase;
 import yt.company.carwash.services.OrderBaseService;
 
+import javax.print.attribute.standard.JobKOctets;
 import java.sql.Timestamp;
 import java.util.Date;
 
 @RestController
 @RequestMapping(value = "/order")
-
+@RequiredArgsConstructor
 public class OrderController {
-    @Autowired
-    private  OrderBaseService orderBaseService;
+    private final OrderBaseService orderBaseService;
 
 
     @GetMapping
     public ResponseEntity<?> getAllOrders() {
-        return ResponseEntity.ok(orderService.getAllOrders());
+        return ResponseEntity.ok(orderBaseService.getAllOrders());
     }
 
     @GetMapping(value = "/{id}")
@@ -34,23 +34,10 @@ public class OrderController {
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-
-
-    }
-
-    @GetMapping
-    public ResponseEntity<?> getAllOrders() {
-        return ResponseEntity.ok(orderBaseService.getAllOrders());
-
     }
 
     @PostMapping(value = "/create")
-    public ResponseEntity<?> createOrder(@RequestParam(name = "client_id") Long clientId,
-                                         @RequestParam(name = "company_id") Long companyId,
-                                         @RequestParam(name = "city_id") Long cityId,
-                                         @RequestParam(name = "service_type_id") Long serviceId,
-                                         @RequestParam(name = "vehicle_type_id") Long vehicleId,
-                                         @RequestParam(name = "time") Timestamp timestamp) {
+    public ResponseEntity<?> createOrder(@RequestParam(name = "client_id") Long clientId, @RequestParam(name = "company_id") Long companyId, @RequestParam(name = "city_id") Long cityId, @RequestParam(name = "service_type_id") Long serviceId, @RequestParam(name = "vehicle_type_id") Long vehicleId, @RequestParam(name = "time") Timestamp timestamp) {
 
         try {
             orderBaseService.createOrder(clientId, companyId, cityId, serviceId, vehicleId, timestamp);
